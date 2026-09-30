@@ -37,7 +37,7 @@ For each scenario I will document:
 
 | ID | Asset | Threat | Vulnerability | Impact | Likelihood | Risk | Recommended Control | Treatment | Residual Risk |
 |---|---|---|---|---|---|---|---|---|---|
-| R-01 | To be assessed | | | | | | | | |
+| R-01 | Human Resources payroll system (stated value: £16k of data) | Phishing email with malicious link | Staff have not had phishing training and MFA is not enabled, allowing stolen credentials to be used to access the system | To be assessed | To be assessed | To be assessed | Phishing awareness training and MFA | To be assessed | To be assessed |
 | R-02 | To be assessed | | | | | | | | |
 | R-03 | To be assessed | | | | | | | | |
 | R-04 | To be assessed | | | | | | | | |
