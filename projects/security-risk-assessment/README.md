@@ -39,7 +39,7 @@ For each scenario I will document:
 |---|---|---|---|---|---|---|---|---|---|
 | R-01 | Human Resources payroll system (stated value: £16k of data) | Phishing email with malicious link | Staff have not had phishing training and MFA is not enabled, allowing stolen credentials to be used to access the system | High — sensitive payroll/personal data; fraud, operational, legal and reputational consequences | High — phishing exposure combined with weak authentication and limited awareness controls | High | MFA; email filtering and DMARC; security awareness training; strong password policy/SSO; least privilege; logging and alerting; incident response plan; encrypted recoverable backups | Mitigate | Low/Medium target, subject to validation after controls are implemented |
 | R-02 | Company employee laptops (25 endpoints) and data/access available through them | Physical theft, loss or unauthorised access in public remote-working locations | Devices may be left unattended; potential gaps in auto-lock, full-disk encryption, remote-working policy, awareness training and MDM | High — potential data exposure, loss of access, operational disruption and compromise of connected services | High — scenario assumes repeated insecure behaviour in public locations across a mobile endpoint fleet | High | Full-disk encryption; enforced screen lock; MDM/remote-wipe capability; MFA for company resources; least privilege; physical safeguards; browser credential controls; remote-working policy; awareness training; rapid incident reporting | Mitigate | Low/Medium target, subject to implementation and control-effectiveness validation |
-| R-03 | To be assessed | | | | | | | | |
+| R-03 | Finance endpoint, credentials, shared company file storage and connected backup repository | Suspected ransomware following a malicious/spoofed supplier attachment | Potential gaps in attachment controls, macro/script restrictions, endpoint detection, least privilege, segmentation and backup isolation | Critical/High — widespread encryption could disrupt operations and recovery; confidentiality impact depends on evidence of exfiltration | High — under the scenario assumptions, malicious execution plus broad write access and connected backups creates substantial exposure | Critical | Immediate network containment; preserve evidence; protect backups; email/attachment controls; macro restrictions; EDR; least privilege/RBAC; segmentation; offline/immutable backups; awareness and restore testing | Mitigate + incident containment | Low/Medium target, subject to successful recovery testing and control validation |
 | R-04 | To be assessed | | | | | | | | |
 | R-05 | To be assessed | | | | | | | | |
 
@@ -126,6 +126,65 @@ The target residual risk is **Low/Medium**. This is a target, not an achieved ra
 ### Analyst recommendation
 
 Prioritise full-disk encryption, managed endpoint controls, MFA, least privilege and a clear lost-device response process, then validate deployment across all 25 endpoints before accepting the residual risk.
+
+## R-03 Active Incident Assessment
+
+**Title:** Suspected Ransomware Outbreak Following Malicious Excel Attachment — Finance  
+**Status:** Incident in progress (lab scenario)  
+**Classification:** Critical
+
+### Initial diagnosis
+
+The observed sequence — opening an unexpected/suspicious spreadsheet followed by files becoming inaccessible and filenames changing — is consistent with a **suspected ransomware incident**. The exact malware family, execution mechanism, supplier-spoofing method and whether data was exfiltrated are **not yet confirmed** and require investigation.
+
+### First response — contain
+
+The immediate priority is to isolate the affected endpoint from network connectivity to limit further spread or encryption of accessible network resources. The incident-response process should be activated and the organisation's evidence-preservation procedures followed. Whether a device should remain powered on or be shut down depends on the incident-response plan, available expertise and circumstances; preservation of volatile evidence must be balanced against continued malicious activity.
+
+The connected backup repository and shared storage should be protected from the suspected compromise, while avoiding unnecessary destruction of evidence. Credentials/sessions associated with the affected account should be contained according to the response plan.
+
+### Assets at risk
+
+- Finance employee endpoint and authenticated sessions/credentials.
+- Shared company storage accessible to that account, including Finance/Accounts and any other authorised shares.
+- Connected backup infrastructure.
+- Business information accessible through those systems.
+
+### Threat and vulnerabilities
+
+The working hypothesis is malicious code delivered through a deceptive attachment. Possible control gaps include insufficient attachment filtering/sandboxing, weak macro or script restrictions, inadequate endpoint detection, excessive share permissions, limited segmentation, and a backup repository that is continuously reachable from production.
+
+### Impact — Critical/High
+
+Potential consequences include widespread loss of availability through encryption, operational downtime, recovery costs and integrity concerns. Confidentiality impact should not be assumed solely from encryption; evidence of data access or exfiltration must be investigated. Regulatory consequences depend on whether personal data was compromised and the resulting risk to individuals.
+
+### Likelihood — High (scenario assessment)
+
+The High rating reflects the scenario's assumed control weaknesses and observed execution of suspicious activity. Unsupported numerical or industry-ranking claims are not used to justify the rating.
+
+### Inherent risk — Critical
+
+Under this lab's qualitative model, the combination of Critical/High impact and High likelihood is treated as **Critical inherent risk** requiring urgent response.
+
+### Treatment — Mitigate and contain
+
+**Immediate:** isolate affected systems; activate incident response; protect backup and shared-storage recovery options; preserve relevant evidence; investigate the scope; contain compromised identities/sessions; and determine whether other endpoints or servers show indicators of compromise.
+
+**Short term:** strengthen email/attachment controls; restrict untrusted macros/scripts; deploy and tune endpoint detection/response; enforce least privilege and role-based share access; and improve backup isolation/immutability.
+
+**Longer term:** improve segmentation where justified, conduct targeted phishing/supplier-invoice awareness exercises, test restoration regularly, and rehearse the ransomware incident-response plan.
+
+### Backup resilience
+
+Backups should be designed so that compromise of production credentials or systems cannot automatically destroy all recovery copies. The organisation should maintain appropriately separated/offline or immutable recovery copies and regularly verify that restoration actually works.
+
+### Residual risk
+
+Target residual risk is **Low/Medium**, but it is not considered achieved until preventive controls are implemented, recovery is tested, and the organisation reassesses both likelihood and business impact.
+
+### Analyst recommendation
+
+Treat the event as a serious suspected ransomware incident until investigation establishes otherwise. Prioritise containment, preservation of viable recovery copies, scope determination and tested recovery. Purchasing decisions and exact recovery objectives should follow validated technical and business requirements rather than unverified cost assumptions.
 
 ## Security controls to consider
 
