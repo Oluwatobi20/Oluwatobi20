@@ -40,7 +40,7 @@ For each scenario I will document:
 | R-01 | Human Resources payroll system (stated value: £16k of data) | Phishing email with malicious link | Staff have not had phishing training and MFA is not enabled, allowing stolen credentials to be used to access the system | High — sensitive payroll/personal data; fraud, operational, legal and reputational consequences | High — phishing exposure combined with weak authentication and limited awareness controls | High | MFA; email filtering and DMARC; security awareness training; strong password policy/SSO; least privilege; logging and alerting; incident response plan; encrypted recoverable backups | Mitigate | Low/Medium target, subject to validation after controls are implemented |
 | R-02 | Company employee laptops (25 endpoints) and data/access available through them | Physical theft, loss or unauthorised access in public remote-working locations | Devices may be left unattended; potential gaps in auto-lock, full-disk encryption, remote-working policy, awareness training and MDM | High — potential data exposure, loss of access, operational disruption and compromise of connected services | High — scenario assumes repeated insecure behaviour in public locations across a mobile endpoint fleet | High | Full-disk encryption; enforced screen lock; MDM/remote-wipe capability; MFA for company resources; least privilege; physical safeguards; browser credential controls; remote-working policy; awareness training; rapid incident reporting | Mitigate | Low/Medium target, subject to implementation and control-effectiveness validation |
 | R-03 | Finance endpoint, credentials, shared company file storage and connected backup repository | Suspected ransomware following a malicious/spoofed supplier attachment | Potential gaps in attachment controls, macro/script restrictions, endpoint detection, least privilege, segmentation and backup isolation | Critical/High — widespread encryption could disrupt operations and recovery; confidentiality impact depends on evidence of exfiltration | High — under the scenario assumptions, malicious execution plus broad write access and connected backups creates substantial exposure | Critical | Immediate network containment; preserve evidence; protect backups; email/attachment controls; macro restrictions; EDR; least privilege/RBAC; segmentation; offline/immutable backups; awareness and restore testing | Mitigate + incident containment | Low/Medium target, subject to successful recovery testing and control validation |
-| R-04 | To be assessed | | | | | | | | |
+| R-04 | Finance, customer and commercial data; company endpoint containing the downloaded copy | Potential insider data collection or exfiltration during notice period; intent unconfirmed | Possible excessive permissions, weak leaver controls, limited DLP/data classification and insufficient behavioural monitoring | High — potential personal-data, commercial, contractual and operational consequences if data is misused or leaves company control | Medium — anomalous bulk access warrants investigation, but no external transfer or malicious intent is established | High | Preserve and review logs; validate business justification; investigate transfer channels; coordinate proportionate access decisions with HR/management; strengthen leaver workflow, least privilege, DLP and data classification | Mitigate | Low/Medium target, subject to control validation and reassessment |
 | R-05 | To be assessed | | | | | | | | |
 
 ## R-01 Assessment Rationale
@@ -185,6 +185,72 @@ Target residual risk is **Low/Medium**, but it is not considered achieved until 
 ### Analyst recommendation
 
 Treat the event as a serious suspected ransomware incident until investigation establishes otherwise. Prioritise containment, preservation of viable recovery copies, scope determination and tested recovery. Purchasing decisions and exact recovery objectives should follow validated technical and business requirements rather than unverified cost assumptions.
+
+## R-04 Potential Insider Data Collection Assessment
+
+**Title:** Potential Insider Data Collection During Notice Period — Finance  
+**Status:** Alert triaged — under investigation (lab scenario)  
+**Handling:** Confidential — need-to-know
+
+### Facts established by the scenario
+
+- The Finance employee has six years' tenure and is due to leave on Friday.
+- Approximately 8 GB was downloaded from Finance, customer and commercial folders to the company laptop on Wednesday evening.
+- The employee is authorised to access some, but not all, of the relevant folders in the normal course of work.
+- The scenario provides no evidence that the data has been transferred to a personal device, personal cloud service, email account or other external destination.
+- No malicious intent has been established.
+
+### Hypotheses — not findings
+
+Possible explanations include legitimate handover/offline work, accidental or mistaken over-collection, a non-malicious policy breach, or intentional data collection/exfiltration. These hypotheses should guide evidence collection without being treated as conclusions.
+
+### Questions to investigate
+
+Determine what data was downloaded and its sensitivity; whether management requested or expected the activity; whether the files were transferred externally; whether comparable downloads are normal for this user; and whether access to folders outside the employee's role reflects excessive permissions or another authorised business purpose.
+
+### Assets
+
+Finance records, customer information, commercial information/intellectual property, and the company-managed endpoint holding the local copy.
+
+### Threat
+
+Potential insider-related unauthorised collection, disclosure or exfiltration. The actor's intent remains unknown, so accidental, negligent and deliberate scenarios remain open until evidence supports narrowing the assessment.
+
+### Vulnerabilities / control gaps
+
+Potential gaps include over-provisioned permissions, weak leaver/access-review processes, insufficient data classification and DLP controls, and inadequate monitoring/baselining of unusual access patterns.
+
+### Impact — High
+
+If sensitive customer or commercial information leaves authorised company control, consequences could include privacy, contractual, financial and competitive harm. Regulatory obligations depend on the data involved, whether a personal-data breach actually occurred and the risk created for affected individuals.
+
+### Likelihood — Medium
+
+The anomalous volume, timing and access outside normal scope justify investigation. The rating remains Medium because neither malicious intent nor external exfiltration has been established. Unsupported industry percentages are not used.
+
+### Inherent risk — High
+
+Under the lab's qualitative matrix, High Impact combined with Medium Likelihood is assessed as **High inherent risk**.
+
+### Immediate actions
+
+Preserve relevant audit, endpoint, identity and network evidence; identify the files and sensitivity involved; check authorised telemetry for evidence of external transfer; confirm with the line manager whether the activity had a legitimate business purpose; and coordinate any access restriction or employment-related action with appropriate HR/management/legal stakeholders.
+
+Containment should be proportionate to evidence and risk. The security team should not assume that leaving an account active until the final day is inherently required, nor that reducing access is punitive: access decisions should follow business need, established policy and the organisation's response process.
+
+### Treatment — Mitigate
+
+Recommended longer-term controls include a formal joiner/mover/leaver process, role-based access and periodic entitlement reviews, proportionate DLP controls, data classification, appropriate monitoring of anomalous access, restrictions on unauthorised removable media/personal cloud where justified, and clear confidentiality/data-return expectations during offboarding.
+
+Thresholds such as a fixed 1 GB DLP limit should be tuned to normal business behaviour rather than assumed to be universally appropriate.
+
+### Residual risk
+
+Target residual risk is **Low/Medium**, subject to implementation, testing and reassessment. Controls primarily reduce likelihood and exposure; the inherent business impact of losing genuinely sensitive information may remain High even after strong preventive controls are introduced.
+
+### Analyst recommendation
+
+Investigate the alert objectively and proportionately. Preserve evidence, establish the business context and determine whether any data actually left company control before drawing conclusions about intent or misconduct. Escalation should follow the evidence and the organisation's incident, HR and legal processes.
 
 ## Security controls to consider
 
