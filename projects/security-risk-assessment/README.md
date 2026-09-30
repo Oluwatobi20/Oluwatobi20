@@ -1,6 +1,6 @@
 # Project 1: Security Risk Assessment Lab
 
-**Status:** In progress
+**Status:** Completed — assessment exercise
 
 ## Objective
 
@@ -41,7 +41,7 @@ For each scenario I will document:
 | R-02 | Company employee laptops (25 endpoints) and data/access available through them | Physical theft, loss or unauthorised access in public remote-working locations | Devices may be left unattended; potential gaps in auto-lock, full-disk encryption, remote-working policy, awareness training and MDM | High — potential data exposure, loss of access, operational disruption and compromise of connected services | High — scenario assumes repeated insecure behaviour in public locations across a mobile endpoint fleet | High | Full-disk encryption; enforced screen lock; MDM/remote-wipe capability; MFA for company resources; least privilege; physical safeguards; browser credential controls; remote-working policy; awareness training; rapid incident reporting | Mitigate | Low/Medium target, subject to implementation and control-effectiveness validation |
 | R-03 | Finance endpoint, credentials, shared company file storage and connected backup repository | Suspected ransomware following a malicious/spoofed supplier attachment | Potential gaps in attachment controls, macro/script restrictions, endpoint detection, least privilege, segmentation and backup isolation | Critical/High — widespread encryption could disrupt operations and recovery; confidentiality impact depends on evidence of exfiltration | High — under the scenario assumptions, malicious execution plus broad write access and connected backups creates substantial exposure | Critical | Immediate network containment; preserve evidence; protect backups; email/attachment controls; macro restrictions; EDR; least privilege/RBAC; segmentation; offline/immutable backups; awareness and restore testing | Mitigate + incident containment | Low/Medium target, subject to successful recovery testing and control validation |
 | R-04 | Finance, customer and commercial data; company endpoint containing the downloaded copy | Potential insider data collection or exfiltration during notice period; intent unconfirmed | Possible excessive permissions, weak leaver controls, limited DLP/data classification and insufficient behavioural monitoring | High — potential personal-data, commercial, contractual and operational consequences if data is misused or leaves company control | Medium — anomalous bulk access warrants investigation, but no external transfer or malicious intent is established | High | Preserve and review logs; validate business justification; investigate transfer channels; coordinate proportionate access decisions with HR/management; strengthen leaver workflow, least privilege, DLP and data classification | Mitigate | Low/Medium target, subject to control validation and reassessment |
-| R-05 | To be assessed | | | | | | | | |
+| R-05 | Company endpoints, data and privileged third-party remote-access path | Potential supply-chain compromise using a compromised TechAssist technician account | Password-only third-party authentication, shared supplier identity, persistent privileged access, limited approval/alerting, and lack of formal supplier security review | Critical/High — privileged remote access could enable endpoint compromise, credential theft, lateral movement, disruption or data exposure | High — confirmed remote sessions from a known-compromised account create a serious investigation threshold, though malicious activity on endpoints remains unconfirmed | Critical | Suspend/restrict supplier access; isolate and investigate the three affected endpoints; preserve logs; rotate exposed privileged credentials as appropriate; enterprise threat hunt; implement MFA, named identities, PAM/JIT access, least privilege, monitoring and third-party governance | Mitigate + contain | Low/Medium target, subject to forensic findings and control validation |
 
 ## R-01 Assessment Rationale
 
@@ -252,6 +252,70 @@ Target residual risk is **Low/Medium**, subject to implementation, testing and r
 
 Investigate the alert objectively and proportionately. Preserve evidence, establish the business context and determine whether any data actually left company control before drawing conclusions about intent or misconduct. Escalation should follow the evidence and the organisation's incident, HR and legal processes.
 
+## R-05 Third-Party / Supply-Chain Assessment
+
+**Title:** Suspicious Remote Access by Compromised Supplier Account — TechAssist Ltd  
+**Status:** Active security incident investigation (lab scenario)  
+**Handling:** Restricted / need-to-know
+
+### What is known
+
+TechAssist has privileged remote-management access to the company's 25 endpoints. TechAssist reported that one technician account was compromised and stated that it had no evidence customer systems were accessed. Company telemetry independently records remote sessions from that account to three company endpoints at 02:17 Sunday. No malware installation, persistence, data exfiltration or destructive activity has yet been confirmed.
+
+The supplier account uses password-only authentication, is used across multiple customer environments, has persistent remote administrative capability, and does not generate an automatic company security alert when used.
+
+### What remains unknown
+
+Investigation must establish what occurred during the three sessions, whether the sessions were legitimate or attacker-controlled, whether commands/files/configuration changes occurred, whether persistence or credential access occurred, whether additional company systems were reached, and how TechAssist scoped its own investigation.
+
+### Assets
+
+The assets include the 25 company endpoints, the three endpoints with recorded remote sessions, company information and authenticated resources accessible from those endpoints, and the privileged third-party management channel itself.
+
+### Threat
+
+The working threat scenario is abuse of a trusted third-party remote-management identity following compromise of the supplier account. This represents a potential third-party/supply-chain intrusion path. It does not, by itself, establish that the three endpoints were successfully compromised.
+
+### Vulnerabilities / control gaps
+
+Potential gaps include password-only privileged authentication; shared rather than individually attributable supplier identities; persistent 24/7 privileged access; excessive standing privilege; lack of connection approval/notification; insufficient supplier-security assurance; and inadequate monitoring of third-party privileged sessions.
+
+### Impact — Critical/High
+
+If privileged sessions were attacker-controlled, local administrative rights could enable significant endpoint modification, security-control interference, credential access and further movement. Confidentiality, integrity and availability consequences depend on what actions actually occurred and what other resources were reachable. Any privacy/regulatory assessment must be based on evidence of personal-data compromise and the applicable obligations rather than assumed automatically.
+
+### Likelihood — High (investigation priority)
+
+The High rating reflects the combination of TechAssist's confirmed account compromise and company logs showing sessions from that identity. It does **not** mean malicious endpoint compromise has been proven.
+
+### Inherent risk — Critical
+
+Within this lab's qualitative matrix, Critical/High potential impact combined with High likelihood/exposure is treated as **Critical inherent risk** requiring urgent containment and investigation. This is not ranked against the other portfolio risks because different scenarios are not directly comparable without a common quantitative methodology.
+
+### Immediate actions
+
+Temporarily suspend or tightly restrict the affected supplier access path; isolate the three endpoints where proportionate; preserve remote-management, endpoint, identity and network telemetry; establish what actions occurred during the sessions; review the wider estate for related indicators; and rotate/revoke credentials or sessions that investigation shows may have been exposed. Coordinate containment with management and TechAssist without allowing the supplier's investigation to substitute for the company's own evidence.
+
+### Treatment — Mitigate and contain
+
+The organisation should replace standing supplier privilege with controlled access. Recommended controls include MFA for privileged third-party identities, individually attributable technician accounts, least privilege, privileged-access management and just-in-time/time-bounded elevation, explicit connection approval where practical, comprehensive session logging/alerting, and an appropriately segmented management path.
+
+Third-party governance should define security requirements, incident-notification obligations, evidence/cooperation expectations, access reviews and proportionate assurance. Specific certifications or notification deadlines should be selected based on the organisation's requirements and contract rather than assumed universally mandatory.
+
+### Residual risk
+
+Target residual risk is **Low/Medium**, subject to investigation results, implementation and testing. MFA and JIT access can substantially reduce exposure, but the potential impact of compromise through a genuinely privileged supplier channel may remain significant. Residual risk therefore requires periodic reassessment.
+
+### Management response
+
+TechAssist's statement that it has no evidence customer systems were accessed is relevant but does not resolve the company's own telemetry showing three remote sessions. Management should not treat either supplier compromise of the endpoints or endpoint safety as proven without investigation.
+
+Business continuity can be maintained proportionately while the affected access path and endpoints are contained and investigated. Decisions about the remaining endpoints should follow evidence from the threat hunt and the organisation's incident-response process.
+
+### Analyst recommendation
+
+Treat the three recorded sessions as a high-priority security investigation. Contain the trusted remote-access path, determine exactly what occurred, preserve evidence, assess the wider estate, and restore supplier access only under appropriately strengthened authentication, privilege and monitoring controls.
+
 ## Security controls to consider
 
 - Administrative controls
@@ -268,7 +332,7 @@ Investigate the alert objectively and proportionately. Preserve evidence, establ
 
 ## Evidence
 
-This section will be completed as I perform the assessment. I will not mark the lab complete until I can explain and defend each risk decision myself.
+This assessment exercise now contains five completed risk scenarios. Proposed controls and residual-risk ratings are analytical recommendations within the fictional lab; they do not represent controls deployed in a real organisation.
 
 ## Learning outcomes
 
@@ -281,6 +345,6 @@ By completing this project I aim to demonstrate that I can:
 - Choose an appropriate risk treatment
 - Communicate security findings clearly
 
-## Next step
+## Project completion
 
-Complete R-01 independently, beginning with one business asset and identifying a realistic threat and vulnerability.
+Completed scenarios: R-01 credential phishing/payroll risk; R-02 physical endpoint loss/theft; R-03 suspected ransomware incident; R-04 potential insider data collection; and R-05 third-party/supply-chain compromise. The next portfolio project will move from qualitative risk analysis into a hands-on network security lab.
