@@ -38,7 +38,7 @@ For each scenario I will document:
 | ID | Asset | Threat | Vulnerability | Impact | Likelihood | Risk | Recommended Control | Treatment | Residual Risk |
 |---|---|---|---|---|---|---|---|---|---|
 | R-01 | Human Resources payroll system (stated value: £16k of data) | Phishing email with malicious link | Staff have not had phishing training and MFA is not enabled, allowing stolen credentials to be used to access the system | High — sensitive payroll/personal data; fraud, operational, legal and reputational consequences | High — phishing exposure combined with weak authentication and limited awareness controls | High | MFA; email filtering and DMARC; security awareness training; strong password policy/SSO; least privilege; logging and alerting; incident response plan; encrypted recoverable backups | Mitigate | Low/Medium target, subject to validation after controls are implemented |
-| R-02 | To be assessed | | | | | | | | |
+| R-02 | Company employee laptops (25 endpoints) and data/access available through them | Physical theft, loss or unauthorised access in public remote-working locations | Devices may be left unattended; potential gaps in auto-lock, full-disk encryption, remote-working policy, awareness training and MDM | High — potential data exposure, loss of access, operational disruption and compromise of connected services | High — scenario assumes repeated insecure behaviour in public locations across a mobile endpoint fleet | High | Full-disk encryption; enforced screen lock; MDM/remote-wipe capability; MFA for company resources; least privilege; physical safeguards; browser credential controls; remote-working policy; awareness training; rapid incident reporting | Mitigate | Low/Medium target, subject to implementation and control-effectiveness validation |
 | R-03 | To be assessed | | | | | | | | |
 | R-04 | To be assessed | | | | | | | | |
 | R-05 | To be assessed | | | | | | | | |
@@ -78,6 +78,54 @@ The selected treatment is mitigation because the business needs payroll and emai
 ### Residual risk
 
 Target residual risk is **Low/Medium**, but this is not claimed as achieved until the controls have actually been implemented, tested and the risk reassessed.
+
+## R-02 Assessment Rationale
+
+**Title:** Physical Loss / Theft of Endpoint from Insecure Remote Working (Café)
+
+### Asset
+
+The scope is the company's 25 employee laptops and the business information or authenticated access available through them, including local files, cached communications, browser sessions/credentials and remote access to company services.
+
+### Threat
+
+Opportunistic physical theft, device loss and subsequent unauthorised access. The scenario also considers visual exposure or unauthorised interaction when a device is left unattended in a public location.
+
+### Vulnerabilities / control gaps
+
+The assessment identifies compounding weaknesses: repeated unattended-device behaviour; possible gaps in enforced screen locking and full-disk encryption; inadequate remote-working policy or awareness; absence of privacy safeguards; and lack of centrally managed device controls such as MDM and remote-wipe capability.
+
+### Impact — High
+
+Potential consequences include confidentiality loss if business or personal data is exposed, integrity risk if an authenticated session is abused, operational disruption while the endpoint is replaced/recovered, and possible access to connected company services. Regulatory consequences depend on the actual data exposed and circumstances of an incident.
+
+### Likelihood — High (current scenario)
+
+The scenario assumes repeated unattended use in public locations and a fleet of mobile endpoints. The High rating reflects those scenario assumptions rather than a claim about a measured annual theft probability.
+
+### Inherent risk — High
+
+Using this lab's qualitative matrix, High Impact combined with High Likelihood is assessed as **High inherent risk**.
+
+### Treatment — Mitigate
+
+Remote work is a business requirement in this scenario, so the recommended response is to reduce risk through defence-in-depth controls.
+
+### Proposed controls
+
+**Technical:** enforce full-disk encryption; centrally enforce automatic screen locking; use managed endpoint/MDM capabilities including remote response where supported; require MFA for company resources; remove unnecessary local administrator rights; and control storage of credentials/browser sessions.
+
+**Physical:** provide appropriate privacy screens and physical security options where useful, while requiring staff to keep devices under their control in public.
+
+**Administrative:** establish a remote-working security policy; provide targeted security-awareness training; maintain an asset inventory; and require immediate reporting of lost or stolen devices so IT can revoke sessions/credentials and begin incident response.
+
+### Residual risk
+
+The target residual risk is **Low/Medium**. This is a target, not an achieved rating. Full-disk encryption and access controls primarily reduce the consequences of a stolen device; they do not necessarily make the physical theft itself less likely. Residual risk should be reassessed after implementation and testing, with management determining whether it falls within the organisation's risk appetite.
+
+### Analyst recommendation
+
+Prioritise full-disk encryption, managed endpoint controls, MFA, least privilege and a clear lost-device response process, then validate deployment across all 25 endpoints before accepting the residual risk.
 
 ## Security controls to consider
 
