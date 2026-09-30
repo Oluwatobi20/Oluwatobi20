@@ -22,7 +22,7 @@ My goal is to use this GitHub profile to document hands-on labs and projects tha
 
 | Project | Focus | Status |
 | --- | --- | --- |
-| Security Risk Assessment Lab | Assets, threats, vulnerabilities, controls and risk treatment | Planned |
+| [Security Risk Assessment Lab](projects/security-risk-assessment/) | Assets, threats, vulnerabilities, controls and risk treatment | **Completed** |
 | Network Security Lab | Networking, traffic analysis and system hardening | Planned |
 | SOC Log Analysis Lab | Log investigation, alert triage and incident documentation | Planned |
 | Vulnerability Assessment Lab | Vulnerability identification, prioritisation and remediation | Planned |
