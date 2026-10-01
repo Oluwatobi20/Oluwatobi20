@@ -7,7 +7,10 @@
 | R-01 | Credential phishing affecting payroll | MFA | PROTECT | Authentication logs | Verify MFA operates during actual authentication attempts | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | MFA | PROTECT | Controlled access test | Confirm password-only access is denied | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | Security awareness / phishing training | PROTECT | To be developed | To be developed | Not Tested — Lab |
-| R-01 | Credential phishing affecting payroll | Least privilege | PROTECT | To be developed | To be developed | Not Tested — Lab |
+| R-01 | Credential phishing affecting payroll | Least privilege | PROTECT | Payroll access-control matrix / RBAC role definitions | Verify approved roles, permissions and business justification reflect least privilege | Not Tested — Lab |
+| R-01 | Credential phishing affecting payroll | Least privilege | PROTECT | Current payroll access export + AD / Entra ID group membership | Compare actual access against approved access and identify excessive, stale or unauthorised access | Not Tested — Lab |
+| R-01 | Credential phishing affecting payroll | Least privilege | PROTECT | Joiner/Mover/Leaver tickets + periodic access-review evidence | Verify access is provisioned, changed and revoked appropriately and periodically recertified by an accountable owner | Not Tested — Lab |
+| R-01 | Credential phishing affecting payroll | Least privilege | PROTECT | Access/audit logs and controlled negative-access test evidence | Verify unauthorised access is denied and relevant privileged activity is logged | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | Email filtering | PROTECT | To be developed | To be developed | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | Logging / suspicious-login alerts | DETECT | To be developed | To be developed | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | Incident-response procedure | RESPOND | To be developed | To be developed | Not Tested — Lab |
