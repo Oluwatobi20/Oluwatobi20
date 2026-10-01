@@ -33,3 +33,30 @@
 | R-01 | Credential phishing affecting payroll | Security policies / responsibilities | GOVERN | Risk decisions, exception approvals and remediation/action tracker | Verify management decisions are authorised, documented, assigned and tracked through resolution or accepted risk | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | Asset inventory / business-process mapping | IDENTIFY | To be developed | To be developed | Not Tested — Lab |
 | R-01 | Credential phishing affecting payroll | Payroll/phishing risk assessment | IDENTIFY | To be developed | To be developed | Not Tested — Lab |
+
+
+## NIST CSF 2.0 Detailed Mapping — PR.AA-05
+
+**Organisational control:** Payroll least-privilege and separation-of-duties access control  
+**Function:** PROTECT (PR)  
+**Category:** Identity Management, Authentication, and Access Control (PR.AA)  
+**Subcategory:** PR.AA-05  
+**Portfolio result:** Not Tested — Lab
+
+### Evidence
+- Payroll RBAC matrix: roles, permissions and business justification.
+- Live payroll entitlements export plus relevant AD / Entra group-to-role mappings.
+- Periodic access recertification evidence plus Joiner/Mover/Leaver records for the selected review period.
+- Payroll separation-of-duties conflict matrix, including incompatible entitlements such as maintaining bank details and approving payments.
+
+### Test Procedure
+1. Compare selected users' live permissions with approved RBAC roles and investigate additional roles, privilege creep and unexplained entitlements.
+2. Inspect access recertification evidence for genuine owner review and resulting removals/changes. Sample leavers and movers and compare completion times against the organisation's defined access-removal/change target.
+3. Analyse live entitlements for defined SoD conflicts. Where authorised, test whether conflicting access is prevented or routed through an approved exception/compensating-control process.
+
+### Assessment Criteria
+- **PASS:** Tested access aligns with approved roles; review/JML controls operate as required; no unexplained SoD conflicts are identified, or conflicts are prevented/appropriately controlled.
+- **PARTIAL:** The control generally operates but weaknesses such as delayed/incomplete review or appropriately documented compensating controls reduce assurance.
+- **FAIL:** Material excessive or stale access exists, required leaver access remains active, or incompatible payroll capabilities can be exercised without required independent control.
+
+> Sampling sizes and remediation timelines are determined by the assessment scope, population, risk and organisational policy rather than treated as universal NIST requirements.
