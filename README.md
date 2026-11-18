@@ -10,7 +10,7 @@ I work across website content, paid social, email marketing and performance repo
 | --- | --- | --- |
 | [Toby Williams Digital](https://tobywilliamsdigital.co.uk) | Music-focused service positioning, responsive website content, enquiry journeys and technical SEO documentation | Live website |
 | [NeoSonik Studios](https://neosonikstudios.netlify.app/) | Pre-launch studio website, service messaging and enquiry-led presentation for Sheffield and South Yorkshire | Website available; studio business in planning |
-| Paw & Play | Shopify draft-theme customisation, concept product imagery, collections/navigation checks, desktop and mobile preview checks and image-cropping fixes | Private visual demo; products remain drafts; checkout untested |
+| Paw & Play | Shopify theme customisation, UK delivery pricing and test checkout | Pre-launch store. Simulated payment and order confirmation verified. |
 
 ### Toby Williams Digital
 
@@ -28,9 +28,9 @@ A pre-launch website for a planned rehearsal, recording and music-production bus
 
 The project demonstrates audience-focused messaging and website presentation. Premises have not yet been secured; the site is not evidence of an operational studio or verified bookings.
 
-### Paw & Play: Shopify portfolio demonstration
+### Paw & Play | Shopify store preparation and checkout testing
 
-A private dog-accessories store used to develop practical familiarity with Shopify.
+I’m preparing Paw & Play, a UK dog-accessories store, for launch.
 
 - Configured a custom draft theme while retaining the existing Horizon theme.
 - Added a dog hero image and existing lick-mat and slow-feeder concept visuals.
@@ -38,7 +38,9 @@ A private dog-accessories store used to develop practical familiarity with Shopi
 - Checked desktop and mobile card layouts, About navigation, collections, the search page and the empty basket.
 - Kept concept imagery labelled and products in draft.
 
-This project was developed with AI assistance. It is a visual demonstration, not a launched trading store: payments, fulfilment and checkout have not been validated. Private admin links and preview access tokens are intentionally excluded.
+In November 2026, I checked the orange Dog Snuffle Book’s £16.99 price against a UK delivery address. Shopify offered £3.99 standard delivery, bringing the total to £20.98. I then tested that amount through a private checkout using a non-shipping test item. Shopify confirmed the simulated payment, and I restored live payment mode afterwards.
+
+I also checked the supplier’s UK delivery quote to assess the margin before advertising. Live supplier fulfilment and delivery to a customer are still unverified. The project was developed with AI assistance.
 
 ## Professional focus
 
